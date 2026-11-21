@@ -40,7 +40,7 @@ export default function Lab4RefTimer() {
   return (
     <div>
       <p className="status">상태: {running ? 'Running' : 'Stopped'}</p>
-      <div className="count">{count}</div>
+      <div className="count">{Math.floor(count / 60)} : {count % 60}</div>
       <div className="controls">
         <button onClick={start} disabled={running}>Start</button>
         <button className="secondary" onClick={stop} disabled={!running}>Stop</button>
