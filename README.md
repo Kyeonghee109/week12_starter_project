@@ -1,5 +1,8 @@
 # OSS Week 12 — React Hooks Playground (Student Starter)
 
+## Vercel URL
+https://week12-starter-project-96ftpj3rh-vivi13.vercel.app
+
 ## 실행 방법
 Node.js 20.19+ 또는 22.12+ 권장. 프로젝트 폴더에서 실행:
 
@@ -55,10 +58,21 @@ npm run dev
 4. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
 
 ```jsx
-
-
-
+useEffect(() => {
+  if (!running) return;
+  const id = setInterval(() => {
+    setCount(prev => prev + 1);
+  }, 1000);
+  return () => clearInterval(id);
+}, [running]);
 ```
+
+useEffect(() => {: 화면이 그려진 다음에 실행할 일을 정한다
+if (!running) return;: 멈춘 상태면 여기서 바로 끝내고 타이머를 안 만든다.
+setInterval(..., 1000): 1초마다 안쪽 함수를 실행하는 타이머를 키고 그 번호표(ID)를 id에 넣어둔다.
+setCount(prev => prev + 1): 그때그때 가장 최신 count에 1을 더하고 count + 1로 쓰면 처음 값만 기억해서 1에서 멈췄다.
+return () => clearInterval(id): cleanup으로 나중에 정리할 때 이 번호의 타이머를 끄는 것을 약속만 한다. 지금 바로 실행되지 않는다.
+[running]: running이 바뀔 때마다 이 Effect를 다시 실행한다.
 
 ## Lab 비교 분석
 
